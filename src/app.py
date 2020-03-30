@@ -40,6 +40,8 @@ def bytes_to_string(value):
 def load_cfg(filename):
     global cfg
     cfg = ConfigObj(filename,indent_type='  ',encoding="utf8")
+    if len(cfg) == 0:
+        logger.warning('Empty config file !!')
 
 
 def get_sig():
