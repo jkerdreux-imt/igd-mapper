@@ -13,7 +13,7 @@ from configobj import ConfigObj
 
 
 
-CONFIG = '/home/jkx/igd-mapper.ini'
+CONFIG = '/etc/igd-mapper.ini'
 PKG_NAME = 'igd-mapper'
 
 upnp = None
@@ -23,8 +23,6 @@ logger = logging.getLogger(PKG_NAME)
 
 def setup():
     global upnp
-    #coloredlogs.install(level='DEBUG')
-    #logging.basicConfig(level=logging.DEBUG)
     logging.basicConfig(level=logging.INFO, format='%(asctime)s :: %(levelname)s :: %(message)s')
     logger.debug('UPnP discovery')
     upnp = miniupnpc.UPnP()
