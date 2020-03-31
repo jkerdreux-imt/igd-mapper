@@ -18,6 +18,7 @@ Install directly from github (easier)
     pip install git+https://github.com/jkerdreux-imt/igd-mapper.git
 
 Run in a pipenv 
+
     pipenv sync
     pipenv run igd-mapper
 
