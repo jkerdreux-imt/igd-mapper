@@ -20,7 +20,7 @@ setup(
     ],
     keywords=['upnp', 'igd','nat'],
     platforms='any',
-    packages=find_packages("src"),
+    packages=find_packages(),
     include_package_data=True,
 
     entry_points = {
