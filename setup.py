@@ -25,7 +25,7 @@ setup(
 
     entry_points = {
       'console_scripts': [
-          'idg-mapper = igdmapper:main',
+          'igd-mapper = igdmapper:main',
       ]
     },
     install_requires=[
