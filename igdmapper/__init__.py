@@ -5,12 +5,12 @@ import miniupnpc
 import logging
 import configobj
 import platform
+import argparse
 
 from configobj import ConfigObj
 
 # miniupnpc example (and only doc here):
 # https://github.com/miniupnp/miniupnp/blob/master/miniupnpc/testupnpigd.py
-
 
 
 CONFIG = '/etc/igd-mapper.ini'
@@ -48,9 +48,10 @@ def get_sig():
     return '%s-%s' % (PKG_NAME,platform.node())
 
 def cleanup():
+    logger.debug('Cleanup')
+
     i = 0
     to_delete = []
-
     while True:
         r = upnp.getgenericportmapping(i)
         if r == None:
@@ -63,6 +64,7 @@ def cleanup():
         upnp.deleteportmapping(m[0],m[1])
 
 def mapp():
+    logger.debug('Map')
     rules = cfg.get('rules',[])
     for r in rules:
         external = rules[r].get('external',None)
@@ -113,14 +115,29 @@ def show_mapping():
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c',help='config file',dest='config',action='store')
+    parser.add_argument('-l',help='only list nat rules',dest='list',action='store_true')
+    parser.add_argument('-f',help='only drop nat rules',dest='flush',action='store_true')
+    parser.add_argument('-q',help='quiet, disable output',dest='quiet',action='store_true')
+    args = parser.parse_args()
+
     setup()
     if not upnp:
         return
-    load_cfg(CONFIG)
-    show_info()
-    cleanup()
-    mapp()
-    show_mapping()
+    config = args.config or CONFIG
+    load_cfg(config)
+    if args.flush and args.list:
+        print("You can't drop and list at the same time")
+        return
+    if args.quiet != True:
+        show_info()
+    if (args.list != True):
+        cleanup()
+    if (args.flush !=True) and (args.list!=True):
+        mapp()
+    if args.quiet !=True:
+        show_mapping()
 
 
 if __name__ == '__main__':
