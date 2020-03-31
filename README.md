@@ -9,13 +9,17 @@ igd-mapper can be used in interface "PostUP" script.
 
     
 ## Install
-Several option are available:
+Several options are available:
 
     python setup.py install (or develop)
 
 Install directly from github (easier) 
 
     pip install git+https://github.com/jkerdreux-imt/igd-mapper.git
+
+Run in a pipenv 
+    pipenv sync
+    pipenv run igd-mapper
 
 ## Run
 
