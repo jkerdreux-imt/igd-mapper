@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import miniupnpc
 
@@ -111,16 +111,17 @@ def show_mapping():
         i = i+1
     print()
 
+
 def main():
+    setup()
+    if not upnp:
+        return
     load_cfg(CONFIG)
     show_info()
-    #show_mapping()
     cleanup()
     mapp()
     show_mapping()
 
 
 if __name__ == '__main__':
-    setup()
-    if upnp:
-        main()
+    main()
