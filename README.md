@@ -1,10 +1,7 @@
 # IGD-mapper
 
-IGD-mapper is a simple Python script used to setup
-IGD (Internet Gateway Device) nat rules though UPnP.
-
-The script use a config file (/etc/igdmapper.ini) that
-contains the rules for a given host. 
+IGD-mapper is a simple Python script used to setup IGD (Internet Gateway Device) nat rules though UPnP.
+The script use a config file (/etc/igdmapper.ini) that contains the rules for a given host. 
 
 igd-mapper can be used in interface "PostUP" script.
 
@@ -18,7 +15,7 @@ Several option are available:
 
 Install directly from github (easier) 
 
-   pip install git+https://github.com/jkerdreux-imt/igd-mapper.git
+    pip install git+https://github.com/jkerdreux-imt/igd-mapper.git
 
 ## Run
 
