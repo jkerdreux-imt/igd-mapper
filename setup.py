@@ -6,7 +6,7 @@ with open('README.md') as f:
 VERSION = "0.1"
 
 setup(
-    name='igd-mapper',
+    name='igdmapper',
     version=VERSION,
     license='GPL License',
     author='Jerome Kerdreux',
@@ -20,12 +20,12 @@ setup(
     ],
     keywords=['upnp', 'igd','nat'],
     platforms='any',
-    packages=find_packages(),
+    packages=find_packages("src"),
     include_package_data=True,
 
     entry_points = {
       'console_scripts': [
-          'idg-mapper = src.app:main',
+          'idg-mapper = igdmapper:main',
       ]
     },
     install_requires=[
