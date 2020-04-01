@@ -119,8 +119,12 @@ def main():
     parser.add_argument('-c',help='config file',dest='config',action='store')
     parser.add_argument('-l',help='only list nat rules',dest='list',action='store_true')
     parser.add_argument('-f',help='only drop nat rules',dest='flush',action='store_true')
+    parser.add_argument('-d',help='enable debug',dest='debug',action='store_true')
     parser.add_argument('-q',help='quiet, disable output',dest='quiet',action='store_true')
     args = parser.parse_args()
+
+    if args.debug == True:
+        logger.setLevel(logging.DEBUG)
 
     setup()
     if not upnp:
