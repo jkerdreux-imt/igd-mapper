@@ -27,6 +27,19 @@ Run in a pipenv
 
     igd-mapper 
 
+Options 
+
+    usage: idg-mapper [-h] [-c CONFIG] [-l] [-f] [-d] [-q]
+
+    optional arguments:
+    -h, --help  show this help message and exit
+    -c CONFIG   config file
+    -l          only list nat rules
+    -f          only drop nat rules
+    -d          enable debug
+    -q          quiet, disable output
+
+
 
 ## Notes
 IGD-mapper use custom string to name rules (igd-mapper-hostname). This provides an easy way to find them, and clear old rules.
