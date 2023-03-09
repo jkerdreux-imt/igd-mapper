@@ -1,9 +1,9 @@
-from setuptools import setup,find_packages
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     long_description = f.read()
 
-VERSION = "0.4"
+VERSION = "0.5"
 
 setup(
     name='igdmapper',
@@ -11,14 +11,14 @@ setup(
     license='GPL License',
     author='Jerome Kerdreux',
     author_email='Jerome.Kerdreux@imt-atlantique.fr',
-    #url='',
+    url='https://github.com/jkerdreux-imt/igd-mapper',
     description=('Python script to automate UPnP port mapping'),
     long_description=long_description,
     classifiers=[
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    keywords=['upnp', 'igd','nat'],
+    keywords=['upnp', 'igd', 'nat'],
     platforms='any',
     packages=find_packages(),
     include_package_data=True,
@@ -33,4 +33,3 @@ setup(
         'configobj',
     ]
 )
-

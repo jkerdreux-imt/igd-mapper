@@ -21,6 +21,7 @@ cfg = None
 
 logger = logging.getLogger(PKG_NAME)
 
+
 def setup():
     global upnp
     logging.basicConfig(level=logging.INFO, format='%(asctime)s :: %(levelname)s :: %(message)s')
@@ -33,19 +34,21 @@ def setup():
         logger.warning('Unable to find internet gateway')
         upnp = None
 
+
 def bytes_to_string(value):
     return '%sMB' % int(value/1024/1024)
 
 
 def load_cfg(filename):
     global cfg
-    cfg = ConfigObj(filename,indent_type='  ',encoding="utf8")
+    cfg = ConfigObj(filename, indent_type='  ', encoding="utf8")
     if len(cfg) == 0:
         logger.warning('Empty config file !!')
 
 
 def get_sig():
-    return '%s-%s' % (PKG_NAME,platform.node())
+    return '%s-%s' % (PKG_NAME, platform.node())
+
 
 def cleanup():
     logger.debug('Cleanup')
@@ -57,20 +60,21 @@ def cleanup():
         if r == None:
             break
         if r[3].startswith(get_sig()):
-            to_delete.append((r[0],r[1]))
+            to_delete.append((r[0], r[1]))
         i = i+1
     #
     for m in to_delete:
-        upnp.deleteportmapping(m[0],m[1])
+        upnp.deleteportmapping(m[0], m[1])
+
 
 def mapp():
     logger.debug('Map')
-    rules = cfg.get('rules',[])
+    rules = cfg.get('rules', [])
     for r in rules:
-        external = rules[r].get('external',None)
-        internal = rules[r].get('internal',None)
-        proto = rules[r].get('proto',None)
-        ip = rules[r].get('ip',None)
+        external = rules[r].get('external', None)
+        internal = rules[r].get('internal', None)
+        proto = rules[r].get('proto', None)
+        ip = rules[r].get('ip', None)
 
         if external == None:
             logger.error(f"wrong external port for {r}")
@@ -85,7 +89,7 @@ def mapp():
         external = int(external)
         internal = int(internal)
         try:
-            upnp.addportmapping(external, proto,ip, internal, '%s:%s'% (get_sig(),r), '')
+            upnp.addportmapping(external, proto, ip, internal, '%s:%s' % (get_sig(), r), '')
         except Exception as e:
             pass
 
@@ -108,7 +112,6 @@ def show_mapping():
         
         if r == None:
             break
-        #print(r)
         print(f"{r[3]}\t{r[1]} {r[0]}\t=> {r[2]}")
         i = i+1
     print()
@@ -116,11 +119,11 @@ def show_mapping():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c',help='config file',dest='config',action='store')
-    parser.add_argument('-l',help='only list nat rules',dest='list',action='store_true')
-    parser.add_argument('-f',help='only drop nat rules',dest='flush',action='store_true')
-    parser.add_argument('-d',help='enable debug',dest='debug',action='store_true')
-    parser.add_argument('-q',help='quiet, disable output',dest='quiet',action='store_true')
+    parser.add_argument('-c', help='config file', dest='config', action='store')
+    parser.add_argument('-l', help='only list nat rules', dest='list', action='store_true')
+    parser.add_argument('-f', help='only drop nat rules', dest='flush', action='store_true')
+    parser.add_argument('-d', help='enable debug', dest='debug', action='store_true')
+    parser.add_argument('-q', help='quiet, disable output', dest='quiet', action='store_true')
     args = parser.parse_args()
 
     if args.debug == True:
