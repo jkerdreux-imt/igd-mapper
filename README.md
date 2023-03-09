@@ -14,9 +14,9 @@ Several options are available:
 
     python setup.py install (or develop)
 
-Install directly from github (easier) 
+Install directly from pipy (easier) 
 
-    pip install git+https://github.com/jkerdreux-imt/igd-mapper.git
+    pip install igdmapper
 
 Run in a pipenv 
 
